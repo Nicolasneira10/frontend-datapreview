@@ -1,0 +1,174 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+/* === Estilos personalizados para mi app === */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8fafc;
+}
+
+.app-header {
+  background-color: #2563eb;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+}
+
+.App {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Modo claro */
+.light-mode {
+  background-color: #f8fafc;
+  color: #111;
+  transition: background-color 0.4s, color 0.4s;
+}
+
+/* Modo oscuro */
+.dark-mode {
+  background-color: #1e1e2f;
+  color: #eee;
+  transition: background-color 0.4s, color 0.4s;
+}
+
+/* Asegura que todos los hijos hereden correctamente */
+.dark-mode body,
+.dark-mode html,
+.dark-mode #root {
+  background-color: #1e1e2f;
+  color: #eee;
+}
+
+/* Tarjetas, paneles, y otros bloques */
+.dark-mode .card {
+  background-color: #2e2e42;
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* Estilo para el Drawer de MUI */
+.dark-mode .MuiDrawer-paper {
+  background-color: #282c34;
+  color: white;
+}
+
+.dark-mode .MuiListItem-root:hover {
+  background-color: #3a3f51;
+}
+
+/*Boton cerrar sesion*/
+.logout-button:hover {
+  background-color: #ffe4e6 !important; /* modo claro */
+}
+
+.dark-mode .logout-button:hover {
+  background-color: #7f1d1d !important; /* modo oscuro */
+}
+
+.dark-mode .logout-button .MuiListItemText-primary {
+  color: #f87171 !important;
+}
+
+.logout-button .MuiListItemText-primary {
+  transition: color 0.3s;
+}
+
+
+
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
+  color: white;
+}
+
+.MuiAppBar-root {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(10px);
+}
+
+.MuiIconButton-root:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(94, 53, 177, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(94, 53, 177, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(94, 53, 177, 0);
+  }
+}

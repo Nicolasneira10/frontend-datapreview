@@ -1,0 +1,201 @@
+.landing-container {
+  min-height: 100vh;
+  background-color: #0c0e1b;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  overflow: hidden;
+}
+
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  background: white;
+  color: black;
+  font-weight: bold;
+  padding: 15px 20px;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+.login-button {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-button:hover {
+  background: white;
+  color: black;
+}
+
+/* Este es el cambio principal visual */
+.landing-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* Todo alineado a la izquierda */
+  max-width: 620px;
+  margin: 0;
+  padding: 20px 0;
+  text-align: left;
+}
+
+
+
+.landing-content h1 {
+  font-size: 48px;
+  margin: 0 auto 0 auto; /* 👈 centra horizontalmente */
+  text-align: center;
+  width: 100%;
+}
+
+.landing-content h1 span {
+  font-weight: 300;
+  color: #c2c2c2;
+}
+
+.landing-content p {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #ccc;
+  line-height: 1.5;
+}
+
+.see-more-button {
+  margin-top: 30px;
+  padding: 12px 30px;
+  background: white;
+  color: #000;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+/* annalect*/
+.logo-img {
+  width: 60px;
+  height: auto;
+  border-radius: 50%;
+  background: white;
+  padding: 5px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: #fff;
+  color: #333;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.modal-box h2 {
+  margin-top: 0;
+  font-size: 22px;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+.modal-content p {
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.close-button {
+  background-color: #7b2cbf;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  float: right;
+}
+
+.close-button:hover {
+  background-color: #5a189a;
+}
+
+.see-more-button {
+  margin: 30px auto 0 auto; /* arriba 30px, centrado horizontalmente */
+  padding: 12px 30px;
+  background: white;
+  color: #000;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.extra-note {
+  display: block; /* Asegura que ocupe su propia línea */
+  margin-top: 20px; /* Más separación del texto principal */
+  font-size: 13px;
+  color: #aaa;
+  line-height: 1.5;
+  text-align: center; /* Opcional si lo quieres centrado */
+}
+
+.see-more-button:hover {
+  background-color: #280942;
+  color: white;
+  transform: scale(1.05);
+}
+
+.info-icon {
+  font-size: 18px;
+  color: #280942;
+  transition: color 0.3s ease;
+}
+
+.see-more-button:hover .info-icon {
+  color: white;
+}
