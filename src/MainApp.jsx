@@ -16,7 +16,7 @@ import Container from '@mui/material/Container';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-// Confirmación de que este archivo sí se usa en producción
+// Confirmación de que este archivo sí se usa en producción para poder finalizar
 
 
 const App = () => {
