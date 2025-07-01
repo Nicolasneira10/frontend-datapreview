@@ -1,13 +1,12 @@
 import axios from 'axios';
 
-// Usa la URL actual de tu backend (expuesta por localtunnel)
-const API_BASE = 'https://hip-carpets-marry.loca.lt'; // <-- tu backend
+const API_BASE = import.meta.env.VITE_API_URL;
 
 export const analizarArchivo = async (archivo, yColumn, xColumns, funnel) => {
   const formData = new FormData();
   formData.append('file', archivo);
-  formData.append('y_col', yColumn);              // ✅ CORREGIDO
-  xColumns.forEach(col => formData.append('x_cols[]', col)); // ✅ CORREGIDO
+  formData.append('y_col', yColumn);
+  xColumns.forEach(col => formData.append('x_cols[]', col));
   formData.append('funnel', funnel);
 
   try {
