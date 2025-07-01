@@ -16,8 +16,8 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const validEmail = 'admin@demo.com';
-    const validPassword = 'admin123';
+    const validEmail = 'admindata@demo.com';
+    const validPassword = 'test123!Data';
 
     if (email === validEmail && password === validPassword) {
       localStorage.setItem('isLoggedIn', 'true');
