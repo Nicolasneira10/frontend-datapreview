@@ -16,6 +16,9 @@ import Container from '@mui/material/Container';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
+// Confirmación de que este archivo sí se usa en producción
+
+
 const App = () => {
   const [excelData, setExcelData] = useState([]);
   const [xCol, setXCol] = useState('');
