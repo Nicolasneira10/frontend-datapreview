@@ -29,6 +29,7 @@ const App = () => {
   const [showSnackbar, setShowSnackbar] = useState(false);
 
   const API_BASE_URL = import.meta.env.VITE_API_URL;
+  //forzar cambio para git
 
   const theme = createTheme({
     palette: {
