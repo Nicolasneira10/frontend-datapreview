@@ -28,6 +28,8 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(prefersDark);
   const [showSnackbar, setShowSnackbar] = useState(false);
 
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
+
   const theme = createTheme({
     palette: {
       mode: darkMode ? 'dark' : 'light',
@@ -63,7 +65,7 @@ const App = () => {
     formData.append('funnel', funnelStage);
 
     try {
-      const res = await axios.post('http://192.168.1.6:5000/analyze', formData); //http://127.0.0.1:5000/analyze
+      const res = await axios.post(`${API_BASE_URL}/analyze`, formData);
       setResultado(res.data);
       setShowSnackbar(true);
     } catch (error) {
@@ -139,7 +141,7 @@ const App = () => {
                     }}
                     onClick={async () => {
                       try {
-                        const res = await fetch('http://192.168.1.6:5000/download', { //http://127.0.0.1:5000/download
+                        const res = await fetch(`${API_BASE_URL}/download`, {
                           method: 'POST',
                           headers: { 'Content-Type': 'application/json' },
                           body: JSON.stringify(resultado),
