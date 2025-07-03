@@ -86,6 +86,13 @@ body {
   transform: scale(1.03);
 }
 
+/* Centrado del botón de Google */
+.google-login-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
 /* Responsive para móviles */
 @media screen and (max-width: 768px) {
   .login-box {

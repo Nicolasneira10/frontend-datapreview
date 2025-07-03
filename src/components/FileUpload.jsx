@@ -1,15 +1,30 @@
 import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
-import { FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+  Snackbar,
+  Alert
+} from '@mui/material';
 
 function FileUpload({ onDataParsed, onFileSelected }) {
   const [sheetNames, setSheetNames] = useState([]);
   const [selectedSheet, setSelectedSheet] = useState('');
-  const [fileData, setFileData] = useState(null); // Guardar archivo en memoria
+  const [fileData, setFileData] = useState(null); // archivo binario
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
+    // Validar que no exceda 1MB
+    if (file.size > 1048576) {
+      setShowSnackbar(true);
+      return;
+    }
 
     if (onFileSelected) onFileSelected(file);
 
@@ -31,7 +46,7 @@ function FileUpload({ onDataParsed, onFileSelected }) {
         const sheets = workbook.SheetNames;
         setSheetNames(sheets);
         setSelectedSheet(sheets[0]);
-        setFileData(data); // Guardar archivo binario para reuso
+        setFileData(data);
 
         const sheet = workbook.Sheets[sheets[0]];
         const jsonData = XLSX.utils.sheet_to_json(sheet);
@@ -87,6 +102,22 @@ function FileUpload({ onDataParsed, onFileSelected }) {
           </FormControl>
         </div>
       )}
+
+      <Snackbar
+        open={showSnackbar}
+        autoHideDuration={7000}
+        onClose={() => setShowSnackbar(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert
+          onClose={() => setShowSnackbar(false)}
+          severity="warning"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          El archivo supera el límite de 1MB. Por favor, selecciona a uno menor.
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
