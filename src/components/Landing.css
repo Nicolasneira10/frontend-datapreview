@@ -1,3 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .landing-container {
   min-height: 100vh;
   background-color: #0c0e1b;
@@ -43,24 +53,21 @@
   color: black;
 }
 
-/* Este es el cambio principal visual */
 .landing-content {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start; /* Todo alineado a la izquierda */
+  align-items: flex-start;
   max-width: 620px;
   margin: 0;
   padding: 20px 0;
   text-align: left;
 }
 
-
-
 .landing-content h1 {
   font-size: 48px;
-  margin: 0 auto 0 auto; /* 👈 centra horizontalmente */
+  margin: 0 auto 0 auto;
   text-align: center;
   width: 100%;
 }
@@ -78,7 +85,7 @@
 }
 
 .see-more-button {
-  margin-top: 30px;
+  margin: 30px auto 0 auto;
   padding: 12px 30px;
   background: white;
   color: #000;
@@ -87,14 +94,13 @@
   font-weight: bold;
   cursor: pointer;
 
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 10px;
 
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
-/* annalect*/
 .logo-img {
   width: 60px;
   height: auto;
@@ -158,30 +164,13 @@
   background-color: #5a189a;
 }
 
-.see-more-button {
-  margin: 30px auto 0 auto; /* arriba 30px, centrado horizontalmente */
-  padding: 12px 30px;
-  background: white;
-  color: #000;
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-}
-
 .extra-note {
-  display: block; /* Asegura que ocupe su propia línea */
-  margin-top: 20px; /* Más separación del texto principal */
+  display: block;
+  margin-top: 20px;
   font-size: 13px;
   color: #aaa;
   line-height: 1.5;
-  text-align: center; /* Opcional si lo quieres centrado */
+  text-align: center;
 }
 
 .see-more-button:hover {
@@ -198,4 +187,49 @@
 
 .see-more-button:hover .info-icon {
   color: white;
+}
+
+/* 📱 Responsive para móviles */
+@media (max-width: 768px) {
+  .landing-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .landing-content {
+    align-items: center;
+    text-align: center;
+    padding: 20px 10px;
+  }
+
+  .landing-content h1 {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .landing-content p {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .see-more-button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .landing-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 12px;
+    padding: 10px 16px;
+  }
+
+  .login-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
 }

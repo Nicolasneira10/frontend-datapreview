@@ -10,16 +10,18 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .login-box {
-  background: rgba(0, 0, 0, 0.6); /* fondo semitransparente */
-  backdrop-filter: blur(8px);     /* efecto glassmorphism */
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
   border-radius: 16px;
   padding: 40px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   width: 100%;
-  max-width: 400px;
+  max-width: 550px;
 }
 
 .login-form h2 {
@@ -93,9 +95,25 @@ body {
   margin-bottom: 20px;
 }
 
-/* Responsive para móviles */
+/* 📱 Responsive para móviles */
 @media screen and (max-width: 768px) {
   .login-box {
     padding: 30px 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .login-box {
+    max-width: 90%;
+    padding: 24px;
+  }
+
+  .login-form h2 {
+    font-size: 22px;
+  }
+
+  .login-form button {
+    font-size: 15px;
+    padding: 10px;
   }
 }
