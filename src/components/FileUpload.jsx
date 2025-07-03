@@ -123,3 +123,5 @@ function FileUpload({ onDataParsed, onFileSelected }) {
 }
 
 export default FileUpload;
+
+//tener en cuenta los cambios
