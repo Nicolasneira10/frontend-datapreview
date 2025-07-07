@@ -18,9 +18,19 @@ html, body {
 /* CONTENEDOR GENERAL */
 .container {
   width: 100%;
-  max-width: 1000px; /* antes 800px */
+  max-width: 1000px;
   margin: 0 auto;
   padding: 2rem 1rem;
+}
+
+/* NUEVO: CONTENEDOR FULLSCREEN FLEXIBLE */
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
 }
 
 /* HEADER */
@@ -93,6 +103,14 @@ label {
   display: block;
   font-weight: 500;
   margin-bottom: 0.5rem;
+}
+
+/* NUEVO: FOOTER */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 14px;
+  color: #ccc;
 }
 
 /* 📱 Responsive */

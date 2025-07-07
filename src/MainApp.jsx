@@ -16,9 +16,6 @@ import Container from '@mui/material/Container';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-// Confirmación de que este archivo sí se usa en producción para poder finalizar
-
-
 const App = () => {
   const [excelData, setExcelData] = useState([]);
   const [xCol, setXCol] = useState('');
@@ -32,7 +29,6 @@ const App = () => {
   const [showSnackbar, setShowSnackbar] = useState(false);
 
   const API_BASE_URL = import.meta.env.VITE_API_URL;
-  //forzar cambio para git
 
   const theme = createTheme({
     palette: {
@@ -83,115 +79,119 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className={darkMode ? 'dark-mode' : 'light-mode'}>
-        <main style={{ padding: '1rem' }}>
-          <TopBar darkMode={darkMode} setDarkMode={setDarkMode} />
+        <div className="main-container">
+          <main style={{ flexGrow: 1 }}>
+            <TopBar darkMode={darkMode} setDarkMode={setDarkMode} />
 
-          <Container maxWidth="md">
-            <div className="card" style={{ marginBottom: '1rem' }}>
-              <FileUpload onDataParsed={setExcelData} onFileSelected={setArchivo} />
-            </div>
-
-            <div
-              className="card"
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '1rem',
-                alignItems: 'flex-end',
-                justifyContent: 'space-between',
-                marginBottom: '1rem'
-              }}
-            >
-              <div style={{ flex: '1 1 200px' }}>
-                <ColumnSelector
-                  columns={columns}
-                  xCol={xCol}
-                  yCol={yCol}
-                  onXChange={setXCol}
-                  onYChange={setYCol}
-                />
-              </div>
-
-              <div style={{ flex: '1 1 200px' }}>
-                <FunnelSelector
-                  funnelStage={funnelStage}
-                  setFunnelStage={setFunnelStage}
-                />
-              </div>
-
-              <div style={{ flex: '1 1 200px', textAlign: 'center' }}>
-                <ActionButton onClick={handleRunAnalysis} />
-              </div>
-            </div>
-
-            <div className="card" style={{ maxHeight: '250px', overflowY: 'auto', marginBottom: '1rem' }}>
-              <DataTable data={excelData} />
-            </div>
-
-            {resultado && resultado.plot && (
+            <Container maxWidth="md">
               <div className="card" style={{ marginBottom: '1rem' }}>
-                <CurvePlot base64Img={resultado.plot} r2={resultado.r2} params={resultado.params} medios={resultado.curve.medios} />
+                <FileUpload onDataParsed={setExcelData} onFileSelected={setArchivo} />
+              </div>
 
-                <div style={{ textAlign: 'center', marginTop: '0.5rem' }}>
-                  <button
-                    style={{
-                      backgroundColor: '#4caf50',
-                      color: 'white',
-                      padding: '8px 16px',
-                      fontSize: '14px',
-                      border: 'none',
-                      borderRadius: '5px',
-                      cursor: 'pointer'
-                    }}
-                    onClick={async () => {
-                      try {
-                        const res = await fetch(`${API_BASE_URL}/download`, {
-                          method: 'POST',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify(resultado),
-                        });
+              <div
+                className="card"
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '1rem',
+                  alignItems: 'flex-end',
+                  justifyContent: 'space-between',
+                  marginBottom: '1rem'
+                }}
+              >
+                <div style={{ flex: '1 1 200px' }}>
+                  <ColumnSelector
+                    columns={columns}
+                    xCol={xCol}
+                    yCol={yCol}
+                    onXChange={setXCol}
+                    onYChange={setYCol}
+                  />
+                </div>
 
-                        const blob = await res.blob();
-                        const url = window.URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = 'adbudg_resultado.xlsx';
-                        document.body.appendChild(a);
-                        a.click();
-                        a.remove();
-                        window.URL.revokeObjectURL(url);
-                      } catch (err) {
-                        alert("❌ Error al descargar Excel");
-                        console.error(err);
-                      }
-                    }}
-                  >
-                    📥 Descargar Información
-                  </button>
+                <div style={{ flex: '1 1 200px' }}>
+                  <FunnelSelector
+                    funnelStage={funnelStage}
+                    setFunnelStage={setFunnelStage}
+                  />
+                </div>
+
+                <div style={{ flex: '1 1 200px', textAlign: 'center' }}>
+                  <ActionButton onClick={handleRunAnalysis} />
                 </div>
               </div>
-            )}
 
-            <FunnelFAB darkMode={darkMode} />
+              <div className="card" style={{ maxHeight: '250px', overflowY: 'auto', marginBottom: '1rem' }}>
+                <DataTable data={excelData} />
+              </div>
 
-            <Snackbar
-              open={showSnackbar}
-              autoHideDuration={6000}
-              onClose={() => setShowSnackbar(false)}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            >
-              <MuiAlert
-                elevation={6}
-                variant="filled"
+              {resultado && resultado.plot && (
+                <div className="card" style={{ marginBottom: '1rem' }}>
+                  <CurvePlot base64Img={resultado.plot} r2={resultado.r2} params={resultado.params} medios={resultado.curve.medios} />
+
+                  <div style={{ textAlign: 'center', marginTop: '0.5rem' }}>
+                    <button
+                      style={{
+                        backgroundColor: '#4caf50',
+                        color: 'white',
+                        padding: '8px 16px',
+                        fontSize: '14px',
+                        border: 'none',
+                        borderRadius: '5px',
+                        cursor: 'pointer'
+                      }}
+                      onClick={async () => {
+                        try {
+                          const res = await fetch(`${API_BASE_URL}/download`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(resultado),
+                          });
+
+                          const blob = await res.blob();
+                          const url = window.URL.createObjectURL(blob);
+                          const a = document.createElement('a');
+                          a.href = url;
+                          a.download = 'adbudg_resultado.xlsx';
+                          document.body.appendChild(a);
+                          a.click();
+                          a.remove();
+                          window.URL.revokeObjectURL(url);
+                        } catch (err) {
+                          alert("❌ Error al descargar Excel");
+                          console.error(err);
+                        }
+                      }}
+                    >
+                      📥 Descargar Información
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <FunnelFAB darkMode={darkMode} />
+
+              <Snackbar
+                open={showSnackbar}
+                autoHideDuration={6000}
                 onClose={() => setShowSnackbar(false)}
-                severity="success"
-                sx={{ width: '100%' }}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
               >
-                ✅ Análisis completado con éxito
-              </MuiAlert>
-            </Snackbar>
-          </Container>
-        </main>
+                <MuiAlert
+                  elevation={6}
+                  variant="filled"
+                  onClose={() => setShowSnackbar(false)}
+                  severity="success"
+                  sx={{ width: '100%' }}
+                >
+                  ✅ Análisis completado con éxito
+                </MuiAlert>
+              </Snackbar>
+            </Container>
+          </main>
+
+          <footer className="footer">© Annalect 2025</footer>
+        </div>
       </div>
     </ThemeProvider>
   );
