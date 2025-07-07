@@ -28,9 +28,12 @@ html, body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 2rem 1rem;
   background: linear-gradient(135deg, #1e1b4b, #312e81);
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 1rem;
 }
 
 /* HEADER */

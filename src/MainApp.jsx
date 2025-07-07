@@ -80,7 +80,7 @@ const App = () => {
       <CssBaseline />
       <div className={darkMode ? 'dark-mode' : 'light-mode'}>
         <div className="main-container">
-          <main style={{ flexGrow: 1 }}>
+          <main className="main-content">
             <TopBar darkMode={darkMode} setDarkMode={setDarkMode} />
 
             <Container maxWidth="md">
