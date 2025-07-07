@@ -20,15 +20,67 @@ const App = () => {
   const [excelData, setExcelData] = useState([]);
   const [xCol, setXCol] = useState('');
   const [yCol, setYCol] = useState('');
-  const columns = excelData.length > 0 ? Object.keys(excelData[0]) : [];
   const [funnelStage, setFunnelStage] = useState('');
   const [archivo, setArchivo] = useState(null);
   const [resultado, setResultado] = useState(null);
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [showLimitSnackbar, setShowLimitSnackbar] = useState(false);
+
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [darkMode, setDarkMode] = useState(prefersDark);
-  const [showSnackbar, setShowSnackbar] = useState(false);
-
   const API_BASE_URL = import.meta.env.VITE_API_URL;
+
+  const columns = excelData.length > 0 ? Object.keys(excelData[0]) : [];
+
+  // ---------- NUEVO: control de uso diario ----------
+  const MAX_ANALISIS_DIARIOS = 25;
+
+  const getTodayKey = () => {
+    const today = new Date().toISOString().split('T')[0];
+    return `analisis_count_${today}`;
+  };
+
+  const getAnalysisCount = () => {
+    const key = getTodayKey();
+    return parseInt(localStorage.getItem(key) || '0', 10);
+  };
+
+  const incrementAnalysisCount = () => {
+    const key = getTodayKey();
+    const current = getAnalysisCount();
+    localStorage.setItem(key, current + 1);
+  };
+  // ---------------------------------------------------
+
+  const handleRunAnalysis = async () => {
+    if (!archivo || !xCol || !yCol || !funnelStage) {
+      alert("Faltan datos: archivo, columnas o embudo.");
+      return;
+    }
+
+    const count = getAnalysisCount();
+    if (count >= MAX_ANALISIS_DIARIOS) {
+      setShowLimitSnackbar(true);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', archivo);
+    formData.append('y_col', yCol);
+    formData.append('x_cols[]', xCol);
+    formData.append('funnel', funnelStage);
+
+    try {
+      const res = await axios.post(`${API_BASE_URL}/analyze`, formData);
+      setResultado(res.data);
+      incrementAnalysisCount();
+      setShowSnackbar(true);
+    } catch (error) {
+      const msg = error.response?.data?.error || "Error al analizar el archivo";
+      alert("❌ " + msg);
+      console.error("❌ Error en análisis:", error);
+    }
+  };
 
   const theme = createTheme({
     palette: {
@@ -51,29 +103,6 @@ const App = () => {
       fontFamily: 'Segoe UI, sans-serif',
     },
   });
-
-  const handleRunAnalysis = async () => {
-    if (!archivo || !xCol || !yCol || !funnelStage) {
-      alert("Faltan datos: archivo, columnas o embudo.");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('file', archivo);
-    formData.append('y_col', yCol);
-    formData.append('x_cols[]', xCol);
-    formData.append('funnel', funnelStage);
-
-    try {
-      const res = await axios.post(`${API_BASE_URL}/analyze`, formData);
-      setResultado(res.data);
-      setShowSnackbar(true);
-    } catch (error) {
-      const msg = error.response?.data?.error || "Error al analizar el archivo";
-      alert("❌ " + msg);
-      console.error("❌ Error en análisis:", error);
-    }
-  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -171,6 +200,7 @@ const App = () => {
 
               <FunnelFAB darkMode={darkMode} />
 
+              {/* Snackbar ÉXITO */}
               <Snackbar
                 open={showSnackbar}
                 autoHideDuration={6000}
@@ -185,6 +215,24 @@ const App = () => {
                   sx={{ width: '100%' }}
                 >
                   ✅ Análisis completado con éxito
+                </MuiAlert>
+              </Snackbar>
+
+              {/* Snackbar LÍMITE ALCANZADO */}
+              <Snackbar
+                open={showLimitSnackbar}
+                autoHideDuration={6000}
+                onClose={() => setShowLimitSnackbar(false)}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+              >
+                <MuiAlert
+                  elevation={6}
+                  variant="filled"
+                  onClose={() => setShowLimitSnackbar(false)}
+                  severity="warning"
+                  sx={{ width: '100%' }}
+                >
+                  ⚠️ Has alcanzado tu uso diario de 25 solicitudes. Vuelve mañana a esta misma hora.
                 </MuiAlert>
               </Snackbar>
             </Container>
